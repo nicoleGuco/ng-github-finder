@@ -23,42 +23,26 @@ body {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  padding: 150px 0 105px;
-}
-
-.finder-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-
-  &__title {
-    font-weight: bold;
-    font-size: 60px;
-    color: $active;
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-
-    &__logo {
-      margin-left: 15px;
-    }
-  }
+  padding: 100px 0 105px;
 }
 
 .search-input {
-  position: relative;
-  display: flex;
-  align-items: center;
-  border: 1px solid $medium-grey;
-  border-radius: 24px;
-  height: 44px;
-  max-width: 560px;
   width: 100%;
-  padding: 6px 44px 6px 30px;
+  height: 100%;
+  position: relative;
+  
+  &__bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid $medium-grey;
+    border-radius: 24px;
+    height: 44px;
+    width: 100%;
+    padding: 6px 30px 6px 44px;
 
-  &:hover {
-    box-shadow: 0 1px 6px rgba(32,33,36,.28);
+    &:hover {
+      box-shadow: 0 1px 6px rgba(32,33,36,.28);
+    }
   }
 
   &__input {
@@ -78,7 +62,82 @@ body {
     height: 20px;
     width: 20px;
     position: absolute;
-    right: 15px;
+    left: 15px;
+  }
+}
+
+.finder-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 560px;
+
+  &__title {
+    font-weight: bold;
+    font-size: 60px;
+    color: $active;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    &__logo {
+      margin-left: 15px;
+    }
+  }
+
+  &--open {
+    .search-input__bar {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom: none;
+      box-shadow: 0 1px 6px rgba(32,33,36,.28);
+    }
+  }
+}
+
+.users {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: scroll;
+  position: absolute;
+  top: 43px;
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid $medium-grey;
+  border-top: none;
+  box-shadow: 0 4px 6px rgba(32,33,36,.28);
+  padding: 0 0 6px; 
+  border-radius: 0 0 24px 24px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  padding: 7px 0;
+
+  &:hover {
+    background-color: $light-grey;
+    cursor: pointer;
+  }
+
+  &__link {
+    display: flex;
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    padding: 0 44px 0 30px;
+  }
+
+  &__avatar {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
   }
 }
 
