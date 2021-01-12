@@ -20,5 +20,6 @@
         "react"
     ],
     "rules": {
+        "import/extensions": ["error", "always"]
     }
 }
