@@ -1,5 +1,5 @@
 # ng-github-finder
-tutors management Reast API
+GitHub finder - live search bar of GitHub useres
 
 ## Setup
 First of all please make sure you have node.js installed 
