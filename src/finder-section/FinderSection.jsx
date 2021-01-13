@@ -4,6 +4,7 @@ import githubLogo from '../assets/logos/GitHub-Mark-120px-plus.png';
 import SearchInput from './SearchInput.jsx';
 
 function FinderSection() {
+  const octokit = new Octokit();
   const [users, setUsers] = useState(null);
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -14,13 +15,15 @@ function FinderSection() {
     setIsOpen(false);
   };
 
+  const closeIconOnClickHandler = () => {
+    closeFinderSection();
+  };
+
   const inputChageHandler = async (e) => {
     setSearchValue(e.target.value);
   };
 
   useEffect(() => {
-    const octokit = new Octokit();
-
     const delayDebounceFn = setTimeout(async () => {
       if (searchValue && searchValue.length) {
         const queryString = `${searchValue} in:login`;
@@ -31,7 +34,7 @@ function FinderSection() {
         setUsers(data.items);
         setIsOpen(true);
       }
-    }, 1000);
+    }, 700);
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchValue]);
@@ -40,7 +43,6 @@ function FinderSection() {
     const onClick = (event) => {
       const searchInput = document.getElementsByClassName('search-input')[0];
       if (!searchInput) return;
-
       const targetInSearchInput = searchInput.contains(event.target);
       const targetIsSearchInput = searchInput === event.target;
       if (targetInSearchInput || targetIsSearchInput) return;
@@ -51,7 +53,7 @@ function FinderSection() {
     window.addEventListener('click', onClick, false);
 
     return () => window.removeEventListener('click', onClick, false);
-  });
+  }, []);
 
   return (
     <section className={`finder-section ${isOpen ? 'finder-section--open' : ''}`}>
@@ -59,7 +61,12 @@ function FinderSection() {
       <div className="finder-section__title">
         GitHub User Finder
       </div>
-      <SearchInput searchValue={searchValue} inputChageHandler={inputChageHandler} users={users} />
+      <SearchInput
+        searchValue={searchValue}
+        inputChageHandler={inputChageHandler}
+        closeIconOnClickHandler={closeIconOnClickHandler}
+        users={users}
+      />
     </section>
   );
 }
